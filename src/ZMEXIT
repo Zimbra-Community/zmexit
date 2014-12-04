@@ -1,0 +1,17 @@
+#!/bin/sh
+
+logger -p mail.info $0 $*
+
+case $1 in
+  SUB_NEW|ADD_NEW|DEL_SIGNOFF)
+        $JAVA_HOME/bin/java \
+            -Dzimbra.domain=$MYDOMAIN \
+            -Dzimbra.admin.url=https://$MYADMINURL:7071/service/admin/soap \
+            -Dzimbra.admin.user=$MYADMIN@$MYDOMAIN \
+            -Dzimbra.admin.pass=$MYADMINPASSWORD \
+            -jar $HOME/zimbra/dist/ZimbraListservExit.jar \
+            $*
+        ;;
+esac
+
+exit 0
